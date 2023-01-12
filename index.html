@@ -14,8 +14,35 @@
     <div id="qunit-fixture"></div>
     <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
 
-    <script>
+    <script>   
+    const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
       // A sua solução será escrita aqui!
+       function calcularTroco(precoDoProduto, valorPago) {
+        let diferenca = valorPago -  precoDoProduto; //diferença entre pProduto e pagamento 
+        let aux = 0; // variavel auxiliar pra somar as cedulas
+        let auxTroco = diferenca-aux //variavel auxiliar que ajuda a separar as cedulas
+        let troco = [] // troco
+
+          for (let i = 0; i < cedulasDisponiveis.length; i++) {
+            if (aux != diferenca ) {
+            if (cedulasDisponiveis[i]<=  auxTroco) {
+           console.log(cedulasDisponiveis[i]);
+            troco.push(cedulasDisponiveis[i])
+            aux = aux + cedulasDisponiveis[i];
+      
+          }
+            }else{
+              break
+            }
+          
+         }
+        
+         troco;
+         return troco
+       }
+    
+   
+
     </script>
 
     <script>
@@ -24,11 +51,27 @@
         const resultado = 1 + 1
         assert.equal(resultado, 2) // apenas para sabermos se tudo está funcionando bem
       })
+
       // Um teste falhando estará colorido como vermelho:
       test('Esse é como um teste falhando parece', (assert) => {
-        const resultado = [1,2,3].indexOf(1)  // O valor de 'resultado' será 0 (zero)
-        assert.equal(resultado, -1) // Nós esperamos que essa validação falhe
+        const resultado = [1,2,3].indexOf(3)  // O valor de 'resultado' será 0 (zero)
+        assert.equal(resultado, 2
+        )
+        // Nós esperamos que essa validação falhe
       })
+
+      test('calcularTroco(1,1) deve retornar [] - Um array vazio', (assert) => {
+         const trocoCalculado = calcularTroco(1, 1) // Sem troco, apenas um array vazio
+         const trocoEsperado = []
+         assert.deepEqual(trocoCalculado, trocoEsperado) // 'deepEqual' usado para comparar arrays, veja mais em https://api.qunitjs.com/assert/deepEqual/
+       })
+
+      test('calcularTroco(215, 300) deve retornar [50, 20, 10, 5]', (assert) => {
+        const trocoCalculado = calcularTroco(215, 300) // Esperado um array contendo [50, 20, 10, 5]
+        const trocoEsperado = [50, 20, 10, 5]
+        assert.deepEqual(trocoCalculado, trocoEsperado)
+      })
+
     </script>
 
   </body>
